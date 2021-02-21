@@ -11,7 +11,7 @@
       booksList: '.books-list'
     },
     imageOf: {
-      bookImage: '.book_image'
+      bookImage: '.book__image'
     }
   };
 
@@ -61,17 +61,17 @@
   }
   const favoriteBooks = [];
   function initActions() {
-    const thisBooksList = this;
-    thisBooksList.data = dataSource.books;
-    const booksImages = document.querySelectorAll(select.imageOf.booksImages);
+    
+    const booksImages = document.querySelectorAll(select.imageOf.bookImage);
     console.log('booksImages: ', booksImages);
 
-    for (const bookImage in booksImages) {
+    for (let bookImage of booksImages) {
+      //bookImage = document.querySelector(select.imageOf.bookImage);
       console.log('bookImage: ', bookImage);
-      bookImage.addEventListener('dbclick', function (event) {
+      bookImage.addEventListener('dblclick', function (event) {
         event.preventDefault();
-        event.classList.add(classNames.bookCart.imageFavorite);
-        let id = event.getAttribute('data-id');
+        bookImage.classList.add(classNames.bookCart.imageFavorite);
+        let id = bookImage.getAttribute('data-id');
         console.log(id);
         favoriteBooks.push(id);
 
