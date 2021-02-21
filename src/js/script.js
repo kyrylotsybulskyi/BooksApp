@@ -9,6 +9,16 @@
     },
     containerOf: {
       booksList: '.books-list'
+    },
+    imageOf: {
+      bookImage: '.book_image'
+    }
+  };
+
+  const classNames = {
+    bookCart: {
+      imageFavorite: 'favorite',
+      bookClass: 'book__image',
     }
   };
 
@@ -21,16 +31,16 @@
       /* make a template for a book */
 
       const bookTemplate = Handlebars.compile(document.querySelector(select.templateOf.bookCart).innerHTML);
-      
+
       /* generate HTML from template */
 
       const generatedHTML = bookTemplate(book);
-      console.log('generatedHTML: ',generatedHTML);
+      console.log('generatedHTML: ', generatedHTML);
 
       /* create DOM element */
 
       thisBooksList.element = utils.createDOMFromHTML(generatedHTML);
-      console.log('thisBooksList.element: ',thisBooksList.element);
+      console.log('thisBooksList.element: ', thisBooksList.element);
 
       /* find container of books*/
 
@@ -43,6 +53,35 @@
     }
   }
 
+  function getElements() {
+    const thisBooksList = this;
+
+    thisBooksList.booksList = document.querySelector(select.containerOf.booksList);
+
+  }
+  const favoriteBooks = [];
+  function initActions() {
+    const thisBooksList = this;
+    thisBooksList.data = dataSource.books;
+    const booksImages = document.querySelectorAll(select.imageOf.booksImages);
+    console.log('booksImages: ', booksImages);
+
+    for (const bookImage in booksImages) {
+      console.log('bookImage: ', bookImage);
+      bookImage.addEventListener('dbclick', function (event) {
+        event.preventDefault();
+        event.classList.add(classNames.bookCart.imageFavorite);
+        let id = event.getAttribute('data-id');
+        console.log(id);
+        favoriteBooks.push(id);
+
+        console.log('favoriteBooks: ', favoriteBooks)
+      });
+    }
+  }
+
 
   render();
+  getElements();
+  initActions();
 }
