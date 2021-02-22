@@ -61,7 +61,7 @@
   }
   const favoriteBooks = [];
   function initActions() {
-    
+
     const booksImages = document.querySelectorAll(select.imageOf.bookImage);
     console.log('booksImages: ', booksImages);
 
@@ -70,12 +70,18 @@
       console.log('bookImage: ', bookImage);
       bookImage.addEventListener('dblclick', function (event) {
         event.preventDefault();
-        bookImage.classList.add(classNames.bookCart.imageFavorite);
         let id = bookImage.getAttribute('data-id');
-        console.log(id);
-        favoriteBooks.push(id);
+        if (!favoriteBooks.includes(id)) {
+          bookImage.classList.add(classNames.bookCart.imageFavorite);
+          console.log(id);
+          favoriteBooks.push(id);
+        } else {
+          bookImage.classList.remove(classNames.bookCart.imageFavorite);
+          const indexOfId = favoriteBooks.indexOf(id);
+          favoriteBooks.splice(indexOfId, 1);
+        }
 
-        console.log('favoriteBooks: ', favoriteBooks)
+        console.log('favoriteBooks: ', favoriteBooks);
       });
     }
   }
