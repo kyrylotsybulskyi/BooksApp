@@ -53,17 +53,19 @@
     }
   }
 
-  function getElements() {
+  /*function getElements() {
     const thisBooksList = this;
 
     thisBooksList.booksList = document.querySelector(select.containerOf.booksList);
 
-  }
+  }*/
   const favoriteBooks = [];
   function initActions() {
 
     const booksImages = document.querySelectorAll(select.imageOf.bookImage);
     console.log('booksImages: ', booksImages);
+    const booksList = document.querySelector(select.containerOf.booksList);
+    console.log('booksList: ', booksList);
     const event = 'dblclick';
     booksList.addEventListener(event, function (event) {
       event.preventDefault();
@@ -93,6 +95,6 @@
 
 
   render();
-  getElements();
+  //getElements();
   initActions();
 }
