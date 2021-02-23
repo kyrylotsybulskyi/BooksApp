@@ -97,7 +97,7 @@
     filter.addEventListener('click', function (event) {
       event.preventDefault();
       const value = event.target.value;
-      if (event.target.tagName == 'INPUT' && event.target.type == 'checkbox' && event.target.name == 'filter') {
+      if (event.target.tagName == 'INPUT' && event.target.type == 'checkbox' && event.target.name == 'filter' ){
         console.log(value);
         if (event.target.checked == true) {
           event.target.classList.add(classNames.bookCart.checkedClass);
