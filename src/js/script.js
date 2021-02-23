@@ -19,6 +19,7 @@
     bookCart: {
       imageFavorite: 'favorite',
       bookClass: 'book__image',
+      checkedClass: 'checked'
     }
   };
 
@@ -60,6 +61,7 @@
 
   }*/
   const favoriteBooks = [];
+  const filters = [];
   function initActions() {
 
     const booksImages = document.querySelectorAll(select.imageOf.bookImage);
@@ -88,8 +90,28 @@
         console.log('favoriteBooks: ', favoriteBooks);
 
       }
+
     });
-  }
+    const filter = document.querySelector('.filters');
+    console.log(filter);
+    filter.addEventListener('click', function (event) {
+      event.preventDefault();
+      const value = event.target.value;
+      if (event.target.tagName == 'INPUT' && event.target.type == 'checkbox' && event.target.name == 'filter') {
+        console.log(value);
+        if (event.target.checked == true) {
+          event.target.classList.add(classNames.bookCart.checkedClass);
+          filters.push(value);
+          console.log(filters);
+        } else {
+          event.target.classList.remove(classNames.bookCart.checkedClass);
+          const indexOfFilters = filters.indexOf(value);
+          filters.splice(indexOfFilters, 1);
+        }
+      }
+    });
+  };
+
 
 
 
