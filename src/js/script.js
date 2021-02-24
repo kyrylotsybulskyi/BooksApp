@@ -97,20 +97,21 @@
     filter.addEventListener('click', function (event) {
       event.preventDefault();
       const value = event.target.value;
-      if (event.target.tagName == 'INPUT' && event.target.type == 'checkbox' && event.target.name == 'filter' ){
+      if (event.target.tagName == 'INPUT' && event.target.type == 'checkbox' && event.target.name == 'filter') {
         console.log(value);
-        if (event.target.checked == true) {
+        if (!event.target.classList.contains('checked') == true) {
           event.target.classList.add(classNames.bookCart.checkedClass);
           filters.push(value);
-          console.log(filters);
+
         } else {
           event.target.classList.remove(classNames.bookCart.checkedClass);
           const indexOfFilters = filters.indexOf(value);
           filters.splice(indexOfFilters, 1);
         }
+        console.log(filters);
       }
     });
-  };
+  }
 
 
 
