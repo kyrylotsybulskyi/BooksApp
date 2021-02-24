@@ -19,7 +19,8 @@
     bookCart: {
       imageFavorite: 'favorite',
       bookClass: 'book__image',
-      checkedClass: 'checked'
+      checkedClass: 'checked',
+      hiddenClass: 'hidden'
     }
   };
 
@@ -103,14 +104,47 @@
           event.target.classList.add(classNames.bookCart.checkedClass);
           filters.push(value);
 
+
         } else {
           event.target.classList.remove(classNames.bookCart.checkedClass);
           const indexOfFilters = filters.indexOf(value);
           filters.splice(indexOfFilters, 1);
+
         }
+        filterBooks(filters);
         console.log(filters);
       }
+
     });
+
+  }
+
+  function filterBooks(filters) {
+    const bookImage = document.querySelector(select.imageOf.bookImage);
+    const thisBooksList = this;
+    thisBooksList.data = dataSource.books;
+    //const adultBook = thisBooksList.data.details.adults;
+    //const nonFictionBook = thisBooksList.data.details.nonFiction;
+    let shouldBeHidden = false;
+    for (const book of thisBooksList.data) {
+      for (const filter of filters) {
+        if (!book.details[filter]) {
+          shouldBeHidden = true;
+          break;
+        }
+
+      }
+
+      while (shouldBeHidden == true) {
+        book.bookImage.classList.add(classNames.bookCart.hiddenClass);
+        if (shouldBeHidden == false) {
+          book.bookImage.classList.remove(classNames.bookCart.hiddenClass);
+        }
+      }
+
+
+      //if (book.details)
+    }
   }
 
 
