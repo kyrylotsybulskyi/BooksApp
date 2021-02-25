@@ -141,6 +141,9 @@
 
   }
 
+  function determineRatingBgc(rating){
+
+  }
   render();
   //getElements();
   initActions();
