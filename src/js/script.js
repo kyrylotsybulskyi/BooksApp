@@ -95,7 +95,7 @@
     });
     const filter = document.querySelector('.filters');
     console.log(filter);
-    filter.addEventListener('click', function (event) {
+    filter.addEventListener('change', function (event) {
       event.preventDefault();
       const value = event.target.value;
       if (event.target.tagName == 'INPUT' && event.target.type == 'checkbox' && event.target.name == 'filter') {
@@ -120,13 +120,10 @@
   }
 
   function filterBooks(filters) {
-    const bookImage = document.querySelector(select.imageOf.bookImage);
-    const thisBooksList = this;
-    thisBooksList.data = dataSource.books;
-    //const adultBook = thisBooksList.data.details.adults;
-    //const nonFictionBook = thisBooksList.data.details.nonFiction;
-    let shouldBeHidden = false;
-    for (const book of thisBooksList.data) {
+
+    for (const book of dataSource.books) {
+      let shouldBeHidden = false;
+
       for (const filter of filters) {
         if (!book.details[filter]) {
           shouldBeHidden = true;
@@ -135,21 +132,14 @@
 
       }
 
-      while (shouldBeHidden == true) {
-        book.bookImage.classList.add(classNames.bookCart.hiddenClass);
-        if (shouldBeHidden == false) {
-          book.bookImage.classList.remove(classNames.bookCart.hiddenClass);
-        }
-      }
+      const bookImage = document.querySelector(`${select.imageOf.bookImage}[data-id="${book.id}"]`);
 
+      if (shouldBeHidden) bookImage.classList.add(classNames.bookCart.hiddenClass);
+      else bookImage.classList.remove(classNames.bookCart.hiddenClass);
 
-      //if (book.details)
     }
+
   }
-
-
-
-
 
   render();
   //getElements();
